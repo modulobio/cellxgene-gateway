@@ -19,14 +19,15 @@ WORKDIR /code/cellxgene_VIP
 RUN conda config --set channel_priority flexible && conda env create -n cellxgene_VIP -f VIP.yml 
 RUN conda run -n cellxgene_VIP --live-stream bash ./config.sh
 COPY install_r_requirements.sh .
-RUN conda run -n cellxgene_VIP --live-stream bash install_r_requirements.sh
+# RUN conda run -n cellxgene_VIP --live-stream bash install_r_requirements.sh
 
 # Install CellXGene Gateway
 RUN mkdir /code/cellxgene_gateway
 WORKDIR /code/cellxgene_gateway
 COPY cellxgene_gateway.yml .
 RUN conda env create -n cellxgene_gateway -f cellxgene_gateway.yml
-RUN conda run -n cellxgene_gateway --live-stream pip install git+https://github.com/Novartis/cellxgene-gateway
+# Pulling current git repo - might need to rework this
+RUN conda run -n cellxgene_gateway --live-stream pip install git+https://github.com/modulobio/cellxgene-gateway.git
 
 ENV RETICULATE_PYTHON=/opt/conda/envs/cellxgene_gateway/bin/python
 ENV CELLXGENE_LOCATION=/opt/conda/envs/cellxgene_VIP/bin/cellxgene
