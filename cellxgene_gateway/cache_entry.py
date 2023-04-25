@@ -129,7 +129,7 @@ class CacheEntry:
         return gateway_content
 
     def cellxgene_basepath(self):
-        return f"http://127.0.0.1:{self.port}"
+        return f"http://localhost:{self.port}"
 
     def serve_content(self, path):
         gateway_basepath = self.key.gateway_basepath()
