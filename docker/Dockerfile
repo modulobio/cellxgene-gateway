@@ -27,7 +27,9 @@ WORKDIR /code/cellxgene_gateway
 COPY cellxgene_gateway.yml .
 RUN conda env create -n cellxgene_gateway -f cellxgene_gateway.yml
 # Pulling current git repo - might need to rework this
-RUN conda run -n cellxgene_gateway --live-stream pip install git+https://github.com/modulobio/cellxgene-gateway.git
+# The ADD command allows us to invalidate the Docker cache when the repo is updated
+ADD https://api.github.com/repos/modulobio/cellxgene-gateway/git/refs/heads/master version.json
+RUN conda run -n cellxgene_gateway --live-stream pip install git+https://github.com/modulobio/cellxgene-gateway
 
 ENV RETICULATE_PYTHON=/opt/conda/envs/cellxgene_gateway/bin/python
 ENV CELLXGENE_LOCATION=/opt/conda/envs/cellxgene_VIP/bin/cellxgene
