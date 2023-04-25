@@ -304,11 +304,14 @@ def main():
     )
     cellxgene_data = os.environ.get("CELLXGENE_DATA", None)
     cellxgene_bucket = os.environ.get("CELLXGENE_BUCKET", None)
+    cellxgene_prefix = os.environ.get("CELLXGENE_PREFIX", "")
 
     if cellxgene_bucket is not None:
         from cellxgene_gateway.items.s3.s3item_source import S3ItemSource
 
-        item_sources.append(S3ItemSource(cellxgene_bucket, name="s3"))
+        item_sources.append(
+            S3ItemSource(cellxgene_bucket, name="s3", prefix=cellxgene_prefix)
+        )
         default_item_source = "s3"
     if cellxgene_data is not None:
         from cellxgene_gateway.items.file.fileitem_source import FileItemSource

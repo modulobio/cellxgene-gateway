@@ -32,6 +32,7 @@ class S3ItemSource(ItemSource):
         h5ad_suffix=dir_util.h5ad_suffix,
         annotation_dir_suffix=dir_util.annotations_suffix,
         annotation_file_suffix=".csv",
+        prefix="",
     ):
         self._name = name
         enable_cache = os.environ.get("S3_ENABLE_LISTINGS_CACHE", "false").lower()
@@ -46,6 +47,7 @@ class S3ItemSource(ItemSource):
         self.h5ad_suffix = h5ad_suffix
         self.annotation_dir_suffix = annotation_dir_suffix
         self.annotation_file_suffix = annotation_file_suffix
+        self.prefix = prefix
 
     def url(self, key):
         return "s3://" + self.bucket + "/" + key
@@ -84,7 +86,7 @@ class S3ItemSource(ItemSource):
         )
 
     def scan_directory(self, directory_key="") -> dict:
-        url = self.url(directory_key)
+        url = self.url(self.prefix + "/" + directory_key)
 
         if not self.s3.exists(url):
             raise Exception(f"S3 url '{url}' does not exist.")
