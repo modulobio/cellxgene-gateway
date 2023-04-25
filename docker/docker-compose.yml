@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "5005:5005"
+    environment:
+      - CELLXGENE_BUCKET=modulobio-internal-data
+    volumes:
+      - .:/app/cache
+      - ~/.aws:/root/.aws
