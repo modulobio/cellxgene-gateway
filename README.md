@@ -6,6 +6,12 @@ Cellxgene Gateway allows you to use the Cellxgene Server provided by the Chan Zu
 
 # Running locally
 
+## Modulo Notes
+1. You must have `X11` headers installed on your system so that `Cairo` can be installed (`sudo yum install libXt-devel`)
+2. Make sure `LD_LIBRARY_PATH` is set to the anaconda environment directory so `libpng` can be found (`LD_LIBRARY_PATH=/home/ec2-user/anaconda3/envs/cellxgene_gateway/lib`)
+3. `cellxgene` does not seem to work with symlinks, hard links have to be used instead
+4. 
+
 ## Prequisites
 
 1. This project requires python 3.6 or higher. Please check your version with

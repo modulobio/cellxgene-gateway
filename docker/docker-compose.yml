@@ -5,9 +5,10 @@ services:
     ports:
       - "5005:5005"
     environment:
-      - CELLXGENE_BUCKET=modulobio-internal-data
-      - GATEWAY_LOG_LEVEL=DEBUG
-      - CELLXGENE_PREFIX=scrnaseq_datasets/preprocessed/final_all_cells/
+      - CELLXGENE_DATA=/app/data
+      - GATEWAY_LOG_LEVEL=INFO
+      - GATEWAY_ENABLE_ANNOTATIONS=1
     volumes:
       - .:/app/cache
+      - /efs/sequencing_data/scrnaseq_data/cellxgene:/app/data
       - ~/.aws:/root/.aws

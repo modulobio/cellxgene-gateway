@@ -19,7 +19,7 @@ WORKDIR /code/cellxgene_VIP
 RUN conda config --set channel_priority flexible && conda env create -n cellxgene_VIP -f VIP.yml 
 RUN conda run -n cellxgene_VIP --live-stream bash ./config.sh
 COPY install_r_requirements.sh .
-# RUN conda run -n cellxgene_VIP --live-stream bash install_r_requirements.sh
+RUN conda run -n cellxgene_VIP --live-stream bash install_r_requirements.sh
 
 # Install CellXGene Gateway
 RUN mkdir /code/cellxgene_gateway
@@ -33,5 +33,6 @@ RUN conda run -n cellxgene_gateway --live-stream pip install git+https://github.
 
 ENV RETICULATE_PYTHON=/opt/conda/envs/cellxgene_gateway/bin/python
 ENV CELLXGENE_LOCATION=/opt/conda/envs/cellxgene_VIP/bin/cellxgene
+ENV EXTERNAL_PROTOCOL=https
 
 CMD [ "conda", "run", "--no-capture-output", "-n", "cellxgene_gateway", "cellxgene-gateway" ]
