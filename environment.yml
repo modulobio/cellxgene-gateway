@@ -2,7 +2,7 @@ name: cellxgene-gateway
 channels:
 - conda-forge
 dependencies:
-- python=3.9
+- python=3.11
 - requests
 - flask
 - psutil
@@ -13,6 +13,5 @@ dependencies:
 - pip
 - pip:
   - pre_commit
-  - flask-api
   - werkzeug
   - cellxgene

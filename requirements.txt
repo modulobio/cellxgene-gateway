@@ -1,6 +1,5 @@
 cellxgene
 flask
-flask-api
 werkzeug
 psutil
 requests

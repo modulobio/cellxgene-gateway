@@ -1,3 +1,22 @@
+# 0.4.0
+
+* Removed dependency on flask-api
+* Updated dependencies (python 3.11, numpy, unpinned flask, werkzeug)
+
+# 0.3.12
+
+* #81 List gene set annotations when cell annotations not present
+* #86 Upgrade pip within docker image
+* #73 Moved new link to front
+* #87 Temporarily pin versions of werkzeug and flask
+
+
+# 0.3.11
+
+* #81 added support for gene sets
+* #79 added example for cellxgene-gateway customized docker image
+* #78 prune directories that do not contain h5ad files
+
 # 0.3.10
 
 * #65 Added GATEWAY_EXPIRE_SECONDS to set how long cellxgene servers can remain idle before being terminated.
