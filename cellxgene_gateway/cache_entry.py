@@ -15,6 +15,7 @@ import psutil
 from flask import make_response, render_template, request
 from flask.wrappers import Response
 from requests import get, post, put
+import os
 
 from cellxgene_gateway import env
 from cellxgene_gateway.cellxgene_exception import CellxgeneException
@@ -128,7 +129,14 @@ class CacheEntry:
         return gateway_content
 
     def cellxgene_basepath(self):
-        return f"http://localhost:{self.port}"
+        # Get the container IP address instead of localhost for Docker
+        cellxgene_server_ip = os.environ.get("K_SERVICE_HOST")
+        if cellxgene_server_ip is None:
+            cellxgene_server_ip = "localhost"
+        logger.info(
+            f"cellxgene_server_ip: {cellxgene_server_ip}. Basepath = http://{cellxgene_server_ip}:{self.port}"
+        )
+        return f"http://{cellxgene_server_ip}:{self.port}"
 
     def serve_content(self, path):
         gateway_basepath = self.key.gateway_basepath()
